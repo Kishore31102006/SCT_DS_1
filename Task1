@@ -1,0 +1,26 @@
+from google.colab import files
+uploaded = files.upload()
+import pandas as pd
+import matplotlib.pyplot as plt
+df = pd.read_excel("india.xlsx")
+print(df.head())  # Preview dataset
+
+# Fix for KeyError: 'Gender'.
+# Based on the available columns ('Male', 'Female'), assuming the intent was to show total male and female populations.
+gender_counts = pd.Series({'Male': df['Male'].sum(), 'Female': df['Female'].sum()})
+
+plt.figure()
+plt.bar(gender_counts.index, gender_counts.values)
+plt.title("Gender Distribution")
+plt.xlabel("Gender")
+plt.ylabel("Count")
+plt.show()
+
+# The 'Age' column also does not appear to exist in the DataFrame.
+# This line is commented out to prevent another KeyError.
+# plt.figure()
+# plt.hist(df['Age'])
+# plt.title("Age Distribution")
+# plt.xlabel("Age")
+# plt.ylabel("Frequency")
+# plt.show()
